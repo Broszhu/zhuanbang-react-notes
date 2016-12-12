@@ -23,9 +23,34 @@ var CommentBox2 = React.createClass({displayName: 'CommentBox',
         );
     }
 });
+
+
+
+
+
+
+
+
+
+var data=[
+    {id:1,author:"broszhu",text:"this is broszhu comment"},
+    {id:2,author:"zhuanbang",text:"this is zhuanbang comment"}
+];
+
 var CommentList=React.createClass({
     render:function(){
-        return (<div className="commentList">hello word  I am a CommentList</div>)
+        var commentNodes=this.props.data.map(function(comment){
+            return(
+                <Comment author={comment.author} key={comment.id}>
+                    {comment.text}
+                </Comment>
+            )
+        });
+        return (
+            <div className="commentList">
+                {commentNodes}
+            </div>
+        )
     }
 });
 var CommentForm=React.createClass({
@@ -38,8 +63,7 @@ var CommentBox=React.createClass({
         return(
             <div className="commentBox">
                 <h1>Comments</h1>
-
-                <CommentList />
+                <CommentList data={this.props.data} />
                 <CommentForm />
             </div>
         )
@@ -47,6 +71,7 @@ var CommentBox=React.createClass({
 });
 var Comment=React.createClass({
     render:function(){
+        //var md=new Remarkable();
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
@@ -58,7 +83,7 @@ var Comment=React.createClass({
     }
 });
 
-ReactDOM.render(React.createElement(CommentBox2,null),targetDom);
+ReactDOM.render(<Comment data={data} />,targetDom);
 
 
 
