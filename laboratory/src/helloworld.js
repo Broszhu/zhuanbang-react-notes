@@ -76,7 +76,6 @@ ReactDOM.render(React.createElement(CommentBox2,null),targetDom);
 
 
 
-
 console.dir(React);//14 function 1 attr
 /*
 *
