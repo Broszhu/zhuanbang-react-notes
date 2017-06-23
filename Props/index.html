@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Demo</title>
+    <style>
+        .page-wrap{
+            padding: 15px;
+            border: 1px dashed darkred;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+
+    /*let HelloMsg=React.createClass({
+        getDefaultProps:function () {
+            return {
+                name:"getDefaultProps"
+            }
+        },
+        render:function () {
+            return <h1>hello {this.props.name}</h1>
+        }
+    });
+    ReactDOM.render(<HelloMsg />,oExp);*/
+
+
+    //1、获取目标DOM
+    let oExp=document.getElementById('example');
+
+    //2、写组件
+    let PageUtility=React.createClass({
+        //getInitialState 和 getDefaultProps 是经常用的属性；
+        getInitialState:function () {
+            return{
+                name:"zhu",
+                style:"red",
+                wrapStyle:"page-wrap",
+                link:"https://www.baidu.com/",
+            }
+        },
+        render:function () {
+            //多行的时候，return后面用()可以包为一个整体，()提高优先级
+            return(
+                    <div className={this.state.wrapStyle}>
+                        <HelloVisitors name={this.state.name} style={this.state.style}/>
+                        <PageLink link={this.state.link}/>
+                        <LinkBtn/>
+                    </div>
+            )
+        }
+    });
+
+    let HelloVisitors=React.createClass({
+        render:function () {
+            return <h2 className={this.props.style}>hello {this.props.name}</h2>
+        }
+    });
+    let PageLink=React.createClass({
+        render:function () {
+            return <a href={this.props.link}>{this.props.link}</a>
+        }
+    });
+    let LinkBtn=React.createClass({
+        getInitialState:function () {
+            return {
+                liked:true
+            }
+        },
+        handClick:function (e) {
+            this.setState({liked: !this.state.liked});
+        },
+        render:function () {
+            let textFlag=this.state.liked ? "喜欢" :"不喜欢";
+            return (
+                    <p onClick={this.handClick}>
+                        您 <strong>{textFlag}</strong> 我，点我切换状态
+                    </p>
+            )
+        }
+    });
+
+    //3、组件的DOM渲染
+    ReactDOM.render(<PageUtility />,oExp);
+
+
+
+</script>
+
+</body>
+</html>

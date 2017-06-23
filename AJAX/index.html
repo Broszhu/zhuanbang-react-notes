@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Demo</title>
+    <style>
+        .page-wrap{
+            padding: 15px;
+            border: 1px dashed darkred;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+
+
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+    //1、获取目标DOM
+    let oExp=document.getElementById('example');
+
+    //2、写组件
+    let PageUtility=React.createClass({
+        //getInitialState 和 getDefaultProps 是经常用的属性；
+        getDefaultProps:function () {
+            return {
+                sourceUrl:"https://api.github.com/users/octocat/gists"
+            }
+        },
+        getInitialState:function () {
+            return{
+                userName:"",
+                lastGistUrl:""
+            }
+        },
+        componentDidMount:function () {
+            this.serverReques=$.get(this.props.sourceUrl,function (result) {
+                let lastState=result[0];//储存获得的数据
+                this.setState({
+                    userName:lastState.id,
+                    lastGistUrl:lastState.url
+                });
+
+            }.bind(this))
+        },
+        comonentWillUnmount:function () {
+            this.serverReques.abort();
+        },
+        render:function () {
+            //多行的时候，return后面用()可以包为一个整体，()提高优先级
+            return(
+                    <div className={this.state.wrapStyle}>
+                        <p>用户 {this.state.userName} 最新的Gist 共享地址：</p>
+                        <a href={this.state.lastGistUrl}> {this.state.lastGistUrl} </a>
+                    </div>
+            )
+        }
+    });
+
+    //3、组件的DOM渲染
+    ReactDOM.render(<PageUtility />,oExp);
+
+
+
+</script>
+
+</body>
+</html>
