@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Demo</title>
+    <style>
+        .page-wrap{
+            padding: 15px;
+            border: 1px dashed darkred;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+/*    let HelloMessage = React.createClass({
+        render: function() {
+            return <h1>Hello {this.props.name}</h1>;
+        }
+    });
+    
+    ReactDOM.render(
+            <HelloMessage name="hello" />,
+        document.getElementById('example')
+    );*/
+    //1、获取目标DOM
+    let oExp=document.getElementById('example');
+
+    //2、写组件
+    let PageUtility=React.createClass({
+        render:function () {
+            //多行的时候，return后面用()可以包为一个整体，()提高优先级
+            return(
+                    <div className={this.props.wrapStyle}>
+                        <HelloVisitors name={this.props.name} style={this.props.style}/>
+                        <PageLink link={this.props.link}/>
+                    </div>
+            )
+        }
+    });
+
+    let HelloVisitors=React.createClass({
+        render:function () {
+            return <h2 className={this.props.style}>hello {this.props.name}</h2>
+        }
+    });
+    let PageLink=React.createClass({
+        render:function () {
+            return <a href={this.props.link}>{this.props.link}</a>
+        }
+    });
+
+    //3、配置组件 (用wrapStyle 不用 wrap-style )
+    let ReactPageUtility=<PageUtility name="zhu" style="red" link="https://www.baidu.com/" wrapStyle="page-wrap"/>;//
+
+    //4、组件的DOM渲染
+    ReactDOM.render(ReactPageUtility,oExp);
+</script>
+    
+</body>
+</html>

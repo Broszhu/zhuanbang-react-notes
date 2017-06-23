@@ -1,2 +1,4 @@
 # zhuanbang-react-notes
-朱安邦的react学习笔记
+react学习笔记
+
+1、组件
