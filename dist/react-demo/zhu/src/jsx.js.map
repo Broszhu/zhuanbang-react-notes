@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../react-demo/zhu/src/jsx.js"],"names":["DemoComponent"],"mappings":";;;;AAAA;;;;;;;;;;;;IAEMA,a;;;;;;;;;;;iCACM;AACJ;AACH","file":"jsx.js","sourcesContent":["import React,{ Component} from  'react'\r\n\r\nclass DemoComponent extends Component{\r\n    render(){\r\n        return\r\n    }\r\n}"]}
