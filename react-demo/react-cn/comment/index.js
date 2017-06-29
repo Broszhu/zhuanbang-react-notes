@@ -88,7 +88,7 @@ const CommentBox=React.createClass({
     },
     handleCommentSubmit:function (comment) {
         //ajax
-        data.push(comment);
+        data.unshift(comment);
         this.setState({data:data});
 
     },
